@@ -3,96 +3,457 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SwingQuest · Coming Soon</title>
-<meta name="theme-color" content="#05070f">
-<meta property="og:title" content="SwingQuest — Every round is a quest for the pin.">
-<meta property="og:description" content="Every round is a quest for the pin. Coming soon.">
+<title>SwingQuest · Coming soon</title>
+<meta name="description" content="SwingQuest — every round is a quest for the pin. Meet Ace, your AI caddy. Coming soon.">
+<meta name="theme-color" content="#06140c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SwingQuest — coming soon">
+<meta property="og:description" content="Every round is a quest for the pin. Meet Ace, your AI caddy.">
+<meta property="og:url" content="https://swingquest.app">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23a9d68a'/%3E%3Cpath d='M15 8v16' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M15 8l7 2.6-7 2.6z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root{--sys:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
-  *{margin:0;padding:0;box-sizing:border-box}
-  html,body{height:100%;overflow:hidden}
-  body{font-family:var(--sys);position:relative;color:#f3eccf;
-    background:radial-gradient(120% 80% at 50% -8%, #123a24 0%, transparent 55%),
-      radial-gradient(100% 70% at 80% 110%, #1c2e12 0%, transparent 55%),
-      linear-gradient(170deg,#06170e 0%,#0a2416 45%,#050f0a 100%);background-attachment:fixed;}
-  .grid{position:fixed;inset:0;overflow:hidden;pointer-events:none}
-  .grid::before{content:"";position:absolute;left:-25%;right:-25%;bottom:-10%;height:75%;
-    background-image:linear-gradient(to right,rgba(210,200,150,.09) 1px,transparent 1px),linear-gradient(to top,rgba(210,200,150,.09) 1px,transparent 1px);
-    background-size:52px 52px;transform:perspective(520px) rotateX(66deg);transform-origin:bottom center;
-    mask-image:linear-gradient(to top,#000,transparent 82%);-webkit-mask-image:linear-gradient(to top,#000,transparent 82%);}
-  .stars{position:fixed;inset:0;pointer-events:none}
-  #amb{position:fixed;inset:0;pointer-events:none;z-index:1}
-  .vignette{position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(48% 44% at 50% 44%, rgba(6,23,14,.72) 0%, rgba(6,23,14,.34) 45%, transparent 72%);}
-  .wrap{position:fixed;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:34px 22px;}
-  .logo{width:clamp(66px,9vw,94px);height:clamp(66px,9vw,94px);border-radius:24%;display:grid;place-items:center;
-    background:linear-gradient(100deg,#f4cf5f,#f3eccf 50%,#8fce6a);box-shadow:0 18px 48px rgba(0,0,0,.4),inset 0 1px 2px rgba(255,255,255,.5);}
-  .logo svg{width:56%;height:56%}
-  .pill{margin-top:22px;display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;
-    font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#c9d8bd;background:rgba(210,200,150,.05);border:1px solid rgba(210,200,150,.16);}
-  .pill .dot{width:7px;height:7px;border-radius:50%;background:#8fce6a;box-shadow:0 0 10px #8fce6a;}
-  .word{margin-top:20px;font-weight:800;line-height:.94;font-size:clamp(44px,11vw,112px);letter-spacing:-.02em;}
-  .word .a{color:#fff}
-  .word .b{background:linear-gradient(100deg,#f4cf5f,#f3eccf 50%,#8fce6a);-webkit-background-clip:text;background-clip:text;color:transparent;}
-  .tag{margin-top:16px;font-size:clamp(15px,2.2vw,19px);color:#c9d8bd;max-width:32ch;}
-  .cta{margin-top:30px;display:inline-flex;align-items:center;gap:9px;padding:14px 24px;border-radius:14px;text-decoration:none;
-    font-weight:600;font-size:15px;color:#03121f;background:linear-gradient(100deg,#f4cf5f,#f3eccf 50%,#8fce6a);box-shadow:0 14px 34px rgba(0,0,0,.35);transition:transform .16s ease}
-  .cta:hover{transform:translateY(-2px)}
-  .cta:focus-visible{outline:3px solid #f4cf5f;outline-offset:3px}
-  .powered{margin-top:26px;display:inline-flex;align-items:center;gap:9px;padding:8px 15px;border-radius:999px;
-    font-size:12.5px;letter-spacing:.04em;color:#c9d8bd;background:rgba(210,200,150,.05);border:1px solid rgba(210,200,150,.16);text-decoration:none}
-  .powered .inf{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:6px;font-weight:800;color:#03121f;font-size:13px;background:linear-gradient(100deg,#f4cf5f,#f3eccf 50%,#8fce6a);}
-  .powered b{color:#f3eccf;font-weight:600}
-  .foot{position:fixed;left:0;right:0;bottom:18px;z-index:3;text-align:center;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8aa07f;}
-  @media (prefers-reduced-motion: reduce){#amb{display:none}}
+  :root{
+    --bg:#06140c;
+    --cream:#f4f1e8;
+    --mist:rgba(244,241,232,.60);
+    --mist-2:rgba(244,241,232,.34);
+    --gold:#efd98f;
+    --gold-warm:#f1e2a4;
+    --green:#7fc98a;
+    --green-bright:#8ede97;
+    --green-deep:#14663a;
+    --line:rgba(244,241,232,.12);
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    background:radial-gradient(120% 70% at 50% 18%, #163a24 0%, #0c2416 38%, var(--bg) 100%);
+    background-attachment:fixed;
+    color:var(--cream);
+    min-height:100vh;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  #fx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+  body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(120% 90% at 50% 30%, transparent 55%, rgba(3,10,6,.6) 100%)}
+
+  .layer{position:relative;z-index:3}
+
+  /* ---------------- HERO ---------------- */
+  .hero{
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:40px 24px;position:relative;
+  }
+  .icon{
+    width:112px;height:112px;border-radius:29px;
+    background:linear-gradient(145deg, var(--gold-warm) 0%, #dfe0a0 42%, var(--green) 100%);
+    display:grid;place-items:center;
+    box-shadow:0 24px 60px -18px rgba(143,201,138,.5),0 6px 18px rgba(0,0,0,.35),
+      inset 0 2px 3px rgba(255,255,255,.5),inset 0 -8px 18px rgba(20,80,40,.25);
+    animation:float 5.5s ease-in-out infinite;will-change:transform;
+  }
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .icon svg{width:52px;height:52px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.18))}
+
+  .pill{
+    margin-top:26px;display:inline-flex;align-items:center;gap:10px;
+    font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--mist);
+    background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:100px;padding:9px 18px;
+  }
+  .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--green-bright);
+    box-shadow:0 0 10px var(--green-bright);animation:beat 2.4s ease-in-out infinite}
+  @keyframes beat{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.82)}}
+
+  .word{margin-top:40px;font-weight:800;letter-spacing:-.035em;line-height:.92;
+    font-size:clamp(58px,12.5vw,152px);display:inline-block}
+  .word .swing{color:#f7f5ef}
+  .word .quest{background:linear-gradient(96deg, var(--gold) 0%, #d7d68e 44%, var(--green) 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .tag{margin-top:22px;font-size:clamp(16px,2.2vw,22px);font-weight:400;color:var(--mist);letter-spacing:.005em}
+
+  .scroll{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--mist-2);
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;transition:opacity .4s}
+  .scroll.hide{opacity:0;pointer-events:none}
+  .scroll svg{width:20px;height:20px;animation:nudge 1.8s ease-in-out infinite}
+  @keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+  /* ---------------- ACE SECTION ---------------- */
+  .ace-wrap{max-width:900px;margin:0 auto;padding:20px 24px 30px}
+  .ace-intro{text-align:center;max-width:600px;margin:0 auto 30px}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;
+    font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+    border:1px solid rgba(239,217,143,.28);border-radius:100px;padding:8px 16px;margin-bottom:22px;
+    background:rgba(239,217,143,.05)}
+  .eyebrow .d{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold);animation:beat 2.4s ease-in-out infinite}
+  .ace-intro h2{font-weight:800;letter-spacing:-.03em;font-size:clamp(26px,4.4vw,40px);line-height:1.05}
+  .ace-intro h2 .g{background:linear-gradient(96deg,var(--gold),var(--green));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .ace-intro p{margin-top:14px;color:var(--mist);font-size:clamp(15px,1.9vw,17px);line-height:1.6}
+
+  .green{
+    position:relative;border:1px solid var(--line);border-radius:24px;
+    background:linear-gradient(180deg, rgba(20,60,40,.6), rgba(6,20,12,.5));
+    box-shadow:0 30px 90px -46px rgba(0,0,0,.85), inset 0 1px 0 rgba(255,255,255,.04);
+    padding:28px 28px 24px;overflow:hidden;
+  }
+  .green-label{display:flex;align-items:center;justify-content:space-between;gap:14px;
+    font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mist-2);margin-bottom:6px}
+  .aces{color:var(--gold);font-weight:700;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+
+  .strip{position:relative;height:190px;margin:6px -4px 0;border-radius:16px;overflow:hidden;
+    background:radial-gradient(80% 120% at 12% 120%, rgba(127,201,138,.2), transparent 60%),
+      linear-gradient(180deg, rgba(14,46,28,0), rgba(8,26,16,.9))}
+  .ground{position:absolute;left:0;right:0;bottom:0;height:52px;
+    background:linear-gradient(180deg, rgba(127,201,138,.22), rgba(127,201,138,.06));
+    border-top:1px solid rgba(142,222,151,.25)}
+  .ground::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 26px,rgba(142,222,151,.06) 26px 52px)}
+
+  .ace{position:absolute;left:26px;bottom:34px;z-index:4;width:96px;height:96px;border-radius:50%;border:0;cursor:pointer;
+    background:radial-gradient(60% 60% at 38% 32%, #eafff2 0%, var(--green-bright) 30%, var(--green) 62%, var(--green-deep) 100%);
+    box-shadow:0 0 0 1px rgba(142,222,151,.4),0 12px 40px -8px rgba(127,201,138,.55),
+      inset 0 -8px 20px rgba(0,0,0,.35), inset 0 6px 16px rgba(255,255,255,.4);
+    display:grid;place-items:center;color:#06331d;
+    transition:transform .18s cubic-bezier(.34,1.56,.64,1);animation:float 4.5s ease-in-out infinite}
+  .ace:hover{transform:scale(1.06)}
+  .ace:active{transform:scale(.95)}
+  .ace:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+  .ace .a-name{font-weight:800;font-size:24px;letter-spacing:-.02em;line-height:1}
+  .ace .a-sub{font-size:8.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(6,51,29,.7);margin-top:2px}
+  .ace .ring{position:absolute;inset:-9px;border-radius:50%;border:1.5px solid rgba(142,222,151,.5);opacity:0;animation:sonar 3s ease-out infinite}
+  @keyframes sonar{0%{transform:scale(.9);opacity:.7}100%{transform:scale(1.35);opacity:0}}
+
+  .prompt{position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:5;font-size:13px;color:var(--cream);
+    background:rgba(6,20,12,.72);border:1px solid var(--line);border-radius:100px;padding:8px 15px;
+    white-space:nowrap;backdrop-filter:blur(4px);transition:opacity .3s}
+  .prompt b{color:var(--gold);font-weight:600}
+
+  .bag{position:absolute;left:118px;bottom:22px;z-index:3;width:66px;height:auto;
+    filter:drop-shadow(0 8px 14px rgba(0,0,0,.45));animation:bagSway 6s ease-in-out infinite}
+  @keyframes bagSway{0%,100%{transform:rotate(-1.2deg)}50%{transform:rotate(1.2deg)}}
+  .bag svg{display:block;width:100%;height:auto}
+
+  .pin{position:absolute;right:52px;bottom:34px;z-index:3;width:3px;height:96px;background:#e7e2d3;border-radius:2px}
+  .flag{position:absolute;top:0;left:3px;width:34px;height:22px;background:var(--gold);
+    clip-path:polygon(0 0,100% 24%,100% 76%,0 100%,26% 50%);transform-origin:left center;animation:wave 2.4s ease-in-out infinite}
+  @keyframes wave{0%,100%{transform:skewY(0) scaleX(1)}50%{transform:skewY(-3deg) scaleX(.94)}}
+  .cup{position:absolute;right:44px;bottom:30px;z-index:2;width:22px;height:8px;border-radius:50%;
+    background:radial-gradient(ellipse at center, #041a0f 40%, rgba(4,26,15,0) 72%);border:1px solid rgba(0,0,0,.5)}
+
+  .ball{position:absolute;z-index:5;width:15px;height:15px;border-radius:50%;left:0;top:0;opacity:0;
+    background:radial-gradient(60% 60% at 35% 30%, #fff 0%, #eee 55%, #c9c9c9 100%);
+    box-shadow:0 3px 8px rgba(0,0,0,.4), inset -2px -2px 3px rgba(0,0,0,.15);pointer-events:none}
+  .ball::after{content:"";position:absolute;inset:3px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, transparent 40%, rgba(0,0,0,.06) 41%),
+      radial-gradient(circle at 65% 55%, transparent 40%, rgba(0,0,0,.06) 41%)}
+
+  .burst{position:absolute;inset:0;z-index:6;display:grid;place-items:center;pointer-events:none;opacity:0}
+  .burst.show{animation:burstIn 1.9s ease forwards}
+  @keyframes burstIn{0%{opacity:0;transform:scale(.7)}12%{opacity:1;transform:scale(1.04)}22%{transform:scale(1)}82%{opacity:1}100%{opacity:0;transform:scale(1)}}
+  .burst .hio{font-weight:900;font-size:clamp(30px,6vw,52px);letter-spacing:-.03em;line-height:1;text-align:center;
+    color:var(--gold);text-shadow:0 4px 30px rgba(239,217,143,.5),0 2px 0 rgba(0,0,0,.3)}
+  .burst .hio small{display:block;font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--green-bright);margin-top:10px}
+
+  .ace-say{min-height:24px;text-align:center;margin-top:16px;font-size:15px;color:var(--mist);transition:opacity .3s}
+  .ace-say b{color:var(--gold);font-weight:600}
+
+  .ladder{display:flex;gap:6px;margin-top:18px;align-items:center;justify-content:center;flex-wrap:wrap}
+  .ladder .lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist-2);margin-right:4px}
+  .rung{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--mist-2);
+    border:1px solid var(--line);border-radius:100px;padding:5px 11px;transition:.4s}
+  .rung.on{color:#06331d;background:var(--green-bright);border-color:var(--green-bright);font-weight:700}
+
+  /* reveal on scroll for ace section */
+  .rise{opacity:0;transform:translateY(20px);transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1)}
+  .rise.in{opacity:1;transform:none}
+
+  /* ---------------- CLOSE / FOOTER ---------------- */
+  .close{text-align:center;padding:44px 24px 8px}
+  .close h3{font-weight:800;letter-spacing:-.03em;font-size:clamp(20px,3.2vw,28px)}
+  .close p{color:var(--mist);font-size:14px;margin-top:8px}
+  footer{text-align:center;padding:34px 24px 46px}
+  footer .fb{font-weight:700;letter-spacing:-.01em}
+  footer .eng{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mist-2);margin-top:8px}
+
+  .corner-flag{position:fixed;right:34px;bottom:26px;z-index:2;width:44px;height:auto;opacity:.45;
+    animation:cwave 4s ease-in-out infinite;transform-origin:bottom left}
+  @keyframes cwave{0%,100%{transform:rotate(0)}50%{transform:rotate(-2.5deg)}}
+
+  /* hero entrance */
+  .reveal{opacity:0;transform:translateY(14px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+  .d1{animation-delay:.05s}.d2{animation-delay:.2s}.d3{animation-delay:.36s}.d4{animation-delay:.54s}.d5{animation-delay:.72s}
+  @keyframes rise{to{opacity:1;transform:translateY(0)}}
+
+  @media(max-width:560px){
+    .icon{width:96px;height:96px;border-radius:25px}
+    .icon svg{width:44px;height:44px}
+    .word{margin-top:32px}
+    .green{padding:20px 16px}
+    .strip{height:170px;margin:6px -2px 0}
+    .ace{width:78px;height:78px;left:14px;bottom:30px}
+    .ace .a-name{font-size:20px}
+    .prompt{top:12px;font-size:12px;padding:7px 12px}
+    .bag{left:96px;bottom:20px;width:54px}
+    .pin{right:34px}.cup{right:26px}
+    .corner-flag{right:20px;bottom:18px;width:34px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms!important;animation-iteration-count:1!important}
+    .reveal,.rise{opacity:1;transform:none}
+    .icon,.corner-flag,.pill .dot,.eyebrow .d,.ace,.flag,.ace .ring,.scroll svg{animation:none}
+  }
 </style>
 </head>
 <body>
-  <div class="grid"></div>
-  <canvas class="stars"></canvas>
-  <canvas id="amb"></canvas>
-  <div class="vignette"></div>
-  <main class="wrap">
-    <div class="logo" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M38 78 V26" stroke="#fff" stroke-width="7.5" stroke-linecap="round"/><path d="M38 26 L72 38 L38 50 Z" fill="#fff"/><circle cx="38" cy="78" r="6.5" fill="#fff"/></svg></div>
-    <span class="pill"><span class="dot"></span>Coming soon</span>
-    <h1 class="word"><span class="a">Swing</span><span class="b">Quest</span></h1>
-    <p class="tag">Every round is a quest for the pin.</p>
-    <a class="cta" href="mailto:davealjr@gmail.com?subject=SwingQuest%20inquiry">Inquiries</a>
-    <a class="powered" href="https://infinityengine.ai" target="_blank" rel="noopener"><span class="inf">∞</span></a>
-  </main>
-  <div class="foot">swingquest.app</div>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<!-- HERO -->
+<section class="hero layer">
+  <div class="icon reveal d1" aria-hidden="true">
+    <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15 7v30" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
+      <path d="M15 7c5.5 0 6.5 3.2 11 3.2 0 0 0 7.4 0 8.2-4.5 0-5.5-3.2-11-3.2z" fill="#fff"/>
+      <circle cx="15" cy="37" r="2.6" fill="#fff"/>
+    </svg>
+  </div>
+  <span class="pill reveal d2"><span class="dot"></span>Coming soon</span>
+  <h1 class="word reveal d3"><span class="swing">Swing</span><span class="quest">Quest</span></h1>
+  <p class="tag reveal d4">Every round is a quest for the pin.</p>
+
+  <a class="scroll reveal d5" id="scrollCue" href="#ace" aria-label="Meet Ace">
+    Meet Ace
+    <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
+
+<!-- ACE -->
+<section class="ace-wrap layer" id="ace">
+  <div class="ace-intro rise">
+    <span class="eyebrow"><span class="d"></span>Meet your AI caddy</span>
+    <h2><span class="g">Ace</span> learns your game.</h2>
+    <p>Round one, he's guessing. Round twenty-five, he's reading greens like he's carried your bag for years — your real distances, your misses, your patterns. Tap him and send one at the pin.</p>
+  </div>
+
+  <div class="green rise" aria-label="Play with Ace">
+    <div class="green-label">
+      <span>The 18th · pin high</span>
+      <span class="aces">Holes-in-one: <span id="aceCount">0</span></span>
+    </div>
+
+    <div class="strip" id="strip">
+      <div class="ground"></div>
+
+      <button class="ace" id="aceBtn" aria-label="Tap Ace to hit a shot at the pin">
+        <span class="ring"></span>
+        <span><span class="a-name">Ace</span><span class="a-sub">AI Caddy</span></span>
+      </button>
+
+      <div class="prompt" id="prompt">Tap Ace to send one <b>at the pin →</b></div>
+
+      <div class="bag" aria-hidden="true">
+        <svg viewBox="0 0 66 118" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="bagBody" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#1a7a48"/><stop offset="1" stop-color="#0c2a1a"/>
+            </linearGradient>
+            <linearGradient id="shaft" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#e7ecf1"/><stop offset="1" stop-color="#9aa4ad"/>
+            </linearGradient>
+          </defs>
+          <ellipse cx="33" cy="114" rx="24" ry="4.5" fill="#000" opacity="0.35"/>
+          <path d="M20 60 L7 112" stroke="#c9cfd6" stroke-width="2.4" stroke-linecap="round" opacity=".7"/>
+          <path d="M46 60 L59 112" stroke="#c9cfd6" stroke-width="2.4" stroke-linecap="round" opacity=".7"/>
+          <g stroke-linecap="round">
+            <line x1="30" y1="48" x2="16" y2="9" stroke="url(#shaft)" stroke-width="2.6"/>
+            <line x1="33" y1="48" x2="33" y2="4" stroke="url(#shaft)" stroke-width="2.6"/>
+            <line x1="36" y1="48" x2="50" y2="12" stroke="url(#shaft)" stroke-width="2.6"/>
+          </g>
+          <path d="M12 4 l9 3 -2.5 7 -8.5 -2.5 z" fill="#b9c2ca" stroke="#7f8892" stroke-width="1"/>
+          <rect x="27.5" y="1.5" width="11" height="6" rx="1.6" fill="#cbd2d9" stroke="#7f8892" stroke-width="1"/>
+          <ellipse cx="51" cy="11" rx="8" ry="10" fill="#1f8048"/>
+          <circle cx="51" cy="6" r="2.4" fill="#efd98f"/>
+          <rect x="13" y="44" width="40" height="60" rx="14" fill="url(#bagBody)" stroke="#0a2416" stroke-width="1.2"/>
+          <rect x="15" y="40" width="36" height="12" rx="6" fill="#1f8048"/>
+          <ellipse cx="33" cy="46" rx="16" ry="4.5" fill="#0c2a1a"/>
+          <rect x="30" y="52" width="6" height="50" rx="3" fill="#efd98f" opacity=".92"/>
+          <rect x="18" y="66" width="30" height="22" rx="6" fill="#0e3320" stroke="#0a2416" stroke-width="1"/>
+          <path d="M20 71 H46" stroke="#efd98f" stroke-width="1.4" opacity=".8"/>
+          <circle cx="46" cy="71" r="1.6" fill="#efd98f"/>
+          <path d="M24 55 v9" stroke="#efd98f" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M24 55 l4.5 1.5 -4.5 1.5 z" fill="#efd98f"/>
+          <circle cx="24" cy="66" r="2" fill="#8ede97"/>
+          <path d="M17 48 Q46 60 49 96" fill="none" stroke="#0a2416" stroke-width="3.4" opacity=".6"/>
+        </svg>
+      </div>
+
+      <div class="pin"><span class="flag"></span></div>
+      <div class="cup"></div>
+      <div class="ball" id="ball"></div>
+
+      <div class="burst" id="burst">
+        <div class="hio">Hole&nbsp;in&nbsp;one!<small>You're already winning</small></div>
+      </div>
+    </div>
+
+    <div class="ace-say" id="aceSay">Ace: <b>Give me a swing.</b> Let's see what you've got.</div>
+
+    <div class="ladder" aria-label="Ace's confidence, earned over rounds">
+      <span class="lab">Ace's read</span>
+      <span class="rung on" data-r="0">Learning</span>
+      <span class="rung" data-r="1">Developing</span>
+      <span class="rung" data-r="2">Informed</span>
+      <span class="rung" data-r="3">Experienced</span>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close layer">
+  <h3>The first tee opens soon.</h3>
+  <p>SwingQuest is on the way. Keep an eye on swingquest.app</p>
+</section>
+
+<footer class="layer">
+  <div class="fb">SwingQuest</div>
+  <div class="eng">Powered by Infinity Engine</div>
+</footer>
+
+<svg class="corner-flag" viewBox="0 0 46 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M9 4v54" stroke="#c9a94a" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M9 4c8 0 9.5 4.6 16 4.6 0 0 0 10.6 0 11.8C18.5 20.4 17 15.8 9 15.8z" fill="#c9a94a"/>
+</svg>
+
 <script>
 (function(){
-  const c=document.querySelector('.stars'),x=c.getContext('2d');let s=[];
-  function sz(){c.width=innerWidth;c.height=innerHeight;const n=Math.round(innerWidth*innerHeight/9000);
-    s=Array.from({length:n},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.3+.2,t:Math.random()*6.28,s:Math.random()*.9+.2}));}
-  function d(){x.clearRect(0,0,c.width,c.height);for(const st of s){st.t+=.02*st.s;const a=.35+Math.sin(st.t)*.35;x.beginPath();x.arc(st.x,st.y,st.r,0,6.28);x.fillStyle='rgba(240,225,170,'+a.toFixed(3)+')';x.fill();}requestAnimationFrame(d);}
-  addEventListener('resize',sz);sz();d();
-})();
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-(function(){
-  const c=document.getElementById('amb'),x=c.getContext('2d');
-  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let W,H,pin={x:0,y:0},shots=[],f=0;
-  function size(){W=c.width=innerWidth;H=c.height=innerHeight;pin.x=W*0.8;pin.y=H*0.66;}
-  addEventListener('resize',size);size();
-  function launch(sx,sy){const tx=pin.x+(Math.random()-.5)*44,ty=pin.y+(Math.random()-.5)*22;shots.push({x0:sx,y0:sy,x1:tx,y1:ty,peak:120+Math.random()*150,t:0,dur:88+Math.random()*46,trail:[]});}
-  function tick(){
-    x.clearRect(0,0,W,H);
-    x.strokeStyle='rgba(244,207,95,.45)';x.lineWidth=2;x.beginPath();x.moveTo(pin.x,pin.y);x.lineTo(pin.x,pin.y-34);x.stroke();
-    x.fillStyle='rgba(244,207,95,.75)';x.beginPath();x.moveTo(pin.x,pin.y-34);x.lineTo(pin.x+16,pin.y-28.5);x.lineTo(pin.x,pin.y-23);x.closePath();x.fill();
-    x.fillStyle='rgba(143,206,106,.4)';x.beginPath();x.arc(pin.x,pin.y,4,0,6.28);x.fill();
-    for(let i=shots.length-1;i>=0;i--){const s=shots[i];s.t++;const p=s.t/s.dur;
-      if(p>=1){shots.splice(i,1);continue;}
-      const px=s.x0+(s.x1-s.x0)*p, py=s.y0+(s.y1-s.y0)*p-Math.sin(Math.PI*p)*s.peak;
-      s.trail.push({x:px,y:py});if(s.trail.length>26)s.trail.shift();
-      for(let j=0;j<s.trail.length;j++){const tt=s.trail[j],a=(j/s.trail.length)*0.5;x.beginPath();x.arc(tt.x,tt.y,2,0,6.28);x.fillStyle='rgba(244,207,95,'+a.toFixed(3)+')';x.fill();}
-      x.beginPath();x.arc(px,py,3.4,0,6.28);x.fillStyle='#f3eccf';x.fill();
-    }
-    if(!reduced && f++%150===0 && shots.length<3) launch(-20,H*0.9-Math.random()*90);
-    requestAnimationFrame(tick);
+  /* ---------- COMBINED CANVAS: starfield (always) + money (on burst) ---------- */
+  var canvas=document.getElementById("fx"), ctx=canvas.getContext("2d");
+  var W,H,dpr, stars=[], arc=[], money=[];
+  function size(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    W=canvas.width=innerWidth*dpr; H=canvas.height=innerHeight*dpr;
+    canvas.style.width=innerWidth+"px"; canvas.style.height=innerHeight+"px";
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    build();
   }
-  tick();
-  if(!reduced)addEventListener('pointerdown',e=>{if(e.target.closest('a,input,button'))return;launch(e.clientX,e.clientY);});
+  function build(){
+    stars=[];
+    var n=Math.min(150, Math.round(innerWidth*innerHeight/9000));
+    for(var i=0;i<n;i++) stars.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,
+      r:Math.random()*1.3+.3, base:Math.random()*.4+.12, amp:Math.random()*.35,
+      sp:Math.random()*.02+.004, ph:Math.random()*Math.PI*2, green:Math.random()<.28});
+    arc=[];
+    var cx=innerWidth*0.52, cy=innerHeight*0.30;
+    for(var t=0;t<=1;t+=0.045) arc.push({x:cx+t*innerWidth*0.16, y:cy+t*t*innerHeight*0.16-t*innerHeight*0.02, a:(1-t)*0.26+0.04});
+  }
+
+  function roundRect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+  function drawNote(p){ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);var w=p.s*1.7,h=p.s*0.95;ctx.globalAlpha=Math.min(1,p.life);
+    ctx.fillStyle="#1f9e5a";roundRect(-w/2,-h/2,w,h,3);ctx.fill();
+    ctx.strokeStyle="rgba(255,255,255,.28)";ctx.lineWidth=1;roundRect(-w/2+2,-h/2+2,w-4,h-4,2);ctx.stroke();
+    ctx.fillStyle="rgba(230,255,238,.9)";ctx.beginPath();ctx.arc(0,0,h*0.26,0,7);ctx.fill();
+    ctx.fillStyle="#0d5c31";ctx.font="bold "+(h*0.34)+"px Inter,sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("$",0,1);ctx.restore();}
+  function drawBall(p){ctx.save();ctx.translate(p.x,p.y);ctx.globalAlpha=Math.min(1,p.life);var r=p.s*0.5;
+    var g=ctx.createRadialGradient(-r*0.3,-r*0.3,r*0.2,0,0,r);g.addColorStop(0,"#fff");g.addColorStop(1,"#cfcfcf");
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,r,0,7);ctx.fill();
+    ctx.fillStyle="rgba(0,0,0,.07)";ctx.beginPath();ctx.arc(-r*0.25,-r*0.1,r*0.14,0,7);ctx.fill();
+    ctx.beginPath();ctx.arc(r*0.2,r*0.25,r*0.14,0,7);ctx.fill();ctx.restore();}
+  function drawCoin(p){ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.globalAlpha=Math.min(1,p.life);
+    var r=p.s*0.5, sc=Math.abs(Math.cos(p.rot*1.4));ctx.scale(1,0.35+0.65*sc);
+    var g=ctx.createRadialGradient(-r*0.3,-r*0.3,r*0.2,0,0,r);g.addColorStop(0,"#fff2c2");g.addColorStop(.5,"#efd98f");g.addColorStop(1,"#c8922a");
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,r,0,7);ctx.fill();ctx.strokeStyle="rgba(120,80,10,.5)";ctx.lineWidth=1.4;ctx.stroke();
+    if(sc>0.4){ctx.fillStyle="#8a5e10";ctx.font="bold "+(r*1.05)+"px Inter,sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("$",0,1);}ctx.restore();}
+  var confColors=["#efd98f","#8ede97","#f4f1e8","#7fc98a","#f1e2a4"];
+  function drawConfetti(p){ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.globalAlpha=Math.min(1,p.life);
+    ctx.fillStyle=p.color;ctx.fillRect(-p.s*0.28,-p.s*0.14,p.s*0.56,p.s*0.28);ctx.restore();}
+
+  var tstep=0;
+  function draw(){
+    ctx.clearRect(0,0,innerWidth,innerHeight);
+    tstep++;
+    for(var i=0;i<stars.length;i++){var s=stars[i];
+      var a=reduce?s.base:(s.base+Math.sin(tstep*s.sp+s.ph)*s.amp); if(a<0)a=0;
+      ctx.beginPath();ctx.fillStyle=s.green?"rgba(150,220,160,"+a+")":"rgba(244,241,232,"+a+")";
+      ctx.arc(s.x,s.y,s.r,0,7);ctx.fill();}
+    for(var j=0;j<arc.length;j++){var p=arc[j];ctx.beginPath();ctx.fillStyle="rgba(239,217,143,"+p.a+")";ctx.arc(p.x,p.y,1.4,0,7);ctx.fill();}
+    for(var m=money.length-1;m>=0;m--){var q=money[m];
+      q.sway+=q.swaySpeed; q.x+=q.vx+Math.sin(q.sway)*0.6; q.y+=q.vy; q.rot+=q.vr; q.vy+=0.02; q.life-=0.006;
+      if(q.k===0)drawNote(q);else if(q.k===1)drawBall(q);else if(q.k===2)drawCoin(q);else drawConfetti(q);
+      if(q.y>innerHeight+40||q.life<=0) money.splice(m,1);}
+    if(!reduce) requestAnimationFrame(draw);
+  }
+  size(); addEventListener("resize", size); draw();
+
+  function moneyStorm(){
+    if(reduce) return;
+    var n=Math.min(150, Math.round(innerWidth/6));
+    for(var i=0;i<n;i++){
+      var r=Math.random(), kind=r<0.42?0:r<0.62?2:r<0.78?1:3;
+      money.push({k:kind,x:Math.random()*innerWidth,y:-20-Math.random()*innerHeight*0.6,
+        s:12+Math.random()*16, vy:3.4+Math.random()*4, vx:(Math.random()-0.5)*2.2,
+        rot:Math.random()*Math.PI*2, vr:(Math.random()-0.5)*0.16,
+        sway:Math.random()*Math.PI*2, swaySpeed:0.01+Math.random()*0.03, life:1,
+        color:confColors[(Math.random()*confColors.length)|0]});
+    }
+  }
+
+  /* ---------- ACE + HOLE IN ONE ---------- */
+  var ace=document.getElementById("aceBtn"), ball=document.getElementById("ball"),
+      strip=document.getElementById("strip"), burst=document.getElementById("burst"),
+      prompt=document.getElementById("prompt"), aceSay=document.getElementById("aceSay"),
+      aceCountEl=document.getElementById("aceCount"),
+      rungs=[].slice.call(document.querySelectorAll(".rung"));
+  var aces=0, swinging=false, rung=0;
+  var lines=[
+    "Ace: <b>Flushed it.</b> That's the read paying off.",
+    "Ace: <b>Dead center.</b> I'm learning your tempo.",
+    "Ace: <b>Filthy.</b> Keep feeding me rounds like that.",
+    "Ace: <b>Poured in.</b> See? I earn my confidence.",
+    "Ace: <b>Money.</b> Every swing sharpens my read."
+  ];
+  function hit(){
+    if(swinging) return; swinging=true; prompt.style.opacity="0";
+    var startX=(ace.offsetLeft+ace.offsetWidth*0.9), startY=(ace.offsetTop+ace.offsetHeight*0.35);
+    var cup=strip.querySelector(".cup");
+    var endX=cup.offsetLeft+cup.offsetWidth*0.5-7, endY=cup.offsetTop-2;
+    var peak=Math.min(startY,endY)-(reduce?40:120);
+    ball.style.opacity="1"; var dur=reduce?260:1000, t0=null;
+    function frame(ts){ if(!t0)t0=ts; var t=Math.min(1,(ts-t0)/dur);
+      var x=startX+(endX-startX)*t; var y=(1-t)*(1-t)*startY+2*(1-t)*t*peak+t*t*endY;
+      ball.style.transform="translate("+x+"px,"+y+"px) scale("+(1-0.35*t)+")";
+      if(t<1) requestAnimationFrame(frame); else drop(); }
+    requestAnimationFrame(frame);
+  }
+  function drop(){
+    ball.style.opacity="0"; aces++; aceCountEl.textContent=aces;
+    burst.classList.remove("show"); void burst.offsetWidth; burst.classList.add("show");
+    moneyStorm();
+    var target=Math.min(3, Math.floor(aces/2));
+    if(target!==rung){ rung=target; rungs.forEach(function(r,i){r.classList.toggle("on", i<=rung);}); }
+    aceSay.style.opacity="0";
+    setTimeout(function(){ aceSay.innerHTML=lines[(aces-1)%lines.length]; aceSay.style.opacity="1"; },180);
+    setTimeout(function(){ swinging=false; }, reduce?300:1100);
+  }
+  ace.addEventListener("click", hit);
+
+  /* ---------- scroll cue + reveal-on-scroll ---------- */
+  var cue=document.getElementById("scrollCue");
+  addEventListener("scroll", function(){ if(scrollY>40) cue.classList.add("hide"); else cue.classList.remove("hide"); }, {passive:true});
+  if("IntersectionObserver" in window && !reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.2});
+    document.querySelectorAll(".rise").forEach(function(el){io.observe(el);});
+  } else {
+    document.querySelectorAll(".rise").forEach(function(el){el.classList.add("in");});
+  }
 })();
 </script>
 </body>
