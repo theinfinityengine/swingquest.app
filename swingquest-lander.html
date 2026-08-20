@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwingQuest · Coming Soon</title>
+<meta name="theme-color" content="#05070f">
+<meta property="og:title" content="SwingQuest — Every round is a quest for the pin.">
+<meta property="og:description" content="Every round is a quest for the pin. Coming soon.">
+<style>
+  :root{--sys:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden}
+  body{font-family:var(--sys);position:relative;color:#f3eccf;
+    background:radial-gradient(120% 80% at 50% -8%, #123a24 0%, transparent 55%),
+      radial-gradient(100% 70% at 80% 110%, #1c2e12 0%, transparent 55%),
+      linear-gradient(170deg,#06170e 0%,#0a2416 45%,#050f0a 100%);background-attachment:fixed;}
+  .grid{position:fixed;inset:0;overflow:hidden;pointer-events:none}
+  .grid::before{content:"";position:absolute;left:-25%;right:-25%;bottom:-10%;height:75%;
+    background-image:linear-gradient(to right,rgba(210,200,150,.09) 1px,transparent 1px),linear-gradient(to top,rgba(210,200,150,.09) 1px,transparent 1px);
+    background-size:52px 52px;transform:perspective(520px) rotateX(66deg);transform-origin:bottom center;
+    mask-image:linear-gradient(to top,#000,transparent 82%);-webkit-mask-image:linear-gradient(to top,#000,transparent 82%);}
+  .stars{position:fixed;inset:0;pointer-events:none}
+  #amb{position:fixed;inset:0;pointer-events:none;z-index:1}
+  .vignette{position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(48% 44% at 50% 44%, rgba(6,23,14,.72) 0%, rgba(6,23,14,.34) 45%, transparent 72%);}
+  .wrap{position:fixed;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:34px 22px;}
+  .logo{width:clamp(66px,9vw,94px);height:clamp(66px,9vw,94px);border-radius:24%;display:grid;place-items:center;
+    background:linear-gradient(100deg,#f4cf5f,#f3eccf 50%,#8fce6a);box-shadow:0 18px 48px rgba(0,0,0,.4),inset 0 1px 2px rgba(255,255,255,.5);}
+  .logo svg{width:56%;height:56%}
+  .pill{margin-top:22px;display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;
+    font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#c9d8bd;background:rgba(210,200,150,.05);border:1px solid rgba(210,200,150,.16);}
+  .pill .dot{width:7px;height:7px;border-radius:50%;background:#8fce6a;box-shadow:0 0 10px #8fce6a;}
+  .word{margin-top:20px;font-weight:800;line-height:.94;font-size:clamp(44px,11vw,112px);letter-spacing:-.02em;}
+  .word .a{color:#fff}
+  .word .b{background:linear-gradient(100deg,#f4cf5f,#f3eccf 50%,#8fce6a);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .tag{margin-top:16px;font-size:clamp(15px,2.2vw,19px);color:#c9d8bd;max-width:32ch;}
+  .cta{margin-top:30px;display:inline-flex;align-items:center;gap:9px;padding:14px 24px;border-radius:14px;text-decoration:none;
+    font-weight:600;font-size:15px;color:#03121f;background:linear-gradient(100deg,#f4cf5f,#f3eccf 50%,#8fce6a);box-shadow:0 14px 34px rgba(0,0,0,.35);transition:transform .16s ease}
+  .cta:hover{transform:translateY(-2px)}
+  .cta:focus-visible{outline:3px solid #f4cf5f;outline-offset:3px}
+  .powered{margin-top:26px;display:inline-flex;align-items:center;gap:9px;padding:8px 15px;border-radius:999px;
+    font-size:12.5px;letter-spacing:.04em;color:#c9d8bd;background:rgba(210,200,150,.05);border:1px solid rgba(210,200,150,.16);text-decoration:none}
+  .powered .inf{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:6px;font-weight:800;color:#03121f;font-size:13px;background:linear-gradient(100deg,#f4cf5f,#f3eccf 50%,#8fce6a);}
+  .powered b{color:#f3eccf;font-weight:600}
+  .foot{position:fixed;left:0;right:0;bottom:18px;z-index:3;text-align:center;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8aa07f;}
+  @media (prefers-reduced-motion: reduce){#amb{display:none}}
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <canvas class="stars"></canvas>
+  <canvas id="amb"></canvas>
+  <div class="vignette"></div>
+  <main class="wrap">
+    <div class="logo" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M38 78 V26" stroke="#fff" stroke-width="7.5" stroke-linecap="round"/><path d="M38 26 L72 38 L38 50 Z" fill="#fff"/><circle cx="38" cy="78" r="6.5" fill="#fff"/></svg></div>
+    <span class="pill"><span class="dot"></span>Coming soon</span>
+    <h1 class="word"><span class="a">Swing</span><span class="b">Quest</span></h1>
+    <p class="tag">Every round is a quest for the pin.</p>
+    <a class="cta" href="mailto:ash@infinityengine.ai?subject=SwingQuest%20inquiry">Inquiries &rarr; ash@infinityengine.ai</a>
+    <a class="powered" href="https://infinityengine.ai" target="_blank" rel="noopener"><span class="inf">∞</span>An <b>Infinity&nbsp;Engine</b> platform</a>
+  </main>
+  <div class="foot">swingquest.ai</div>
+<script>
+(function(){
+  const c=document.querySelector('.stars'),x=c.getContext('2d');let s=[];
+  function sz(){c.width=innerWidth;c.height=innerHeight;const n=Math.round(innerWidth*innerHeight/9000);
+    s=Array.from({length:n},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.3+.2,t:Math.random()*6.28,s:Math.random()*.9+.2}));}
+  function d(){x.clearRect(0,0,c.width,c.height);for(const st of s){st.t+=.02*st.s;const a=.35+Math.sin(st.t)*.35;x.beginPath();x.arc(st.x,st.y,st.r,0,6.28);x.fillStyle='rgba(240,225,170,'+a.toFixed(3)+')';x.fill();}requestAnimationFrame(d);}
+  addEventListener('resize',sz);sz();d();
+})();
+
+(function(){
+  const c=document.getElementById('amb'),x=c.getContext('2d');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W,H,pin={x:0,y:0},shots=[],f=0;
+  function size(){W=c.width=innerWidth;H=c.height=innerHeight;pin.x=W*0.8;pin.y=H*0.66;}
+  addEventListener('resize',size);size();
+  function launch(sx,sy){const tx=pin.x+(Math.random()-.5)*44,ty=pin.y+(Math.random()-.5)*22;shots.push({x0:sx,y0:sy,x1:tx,y1:ty,peak:120+Math.random()*150,t:0,dur:88+Math.random()*46,trail:[]});}
+  function tick(){
+    x.clearRect(0,0,W,H);
+    x.strokeStyle='rgba(244,207,95,.45)';x.lineWidth=2;x.beginPath();x.moveTo(pin.x,pin.y);x.lineTo(pin.x,pin.y-34);x.stroke();
+    x.fillStyle='rgba(244,207,95,.75)';x.beginPath();x.moveTo(pin.x,pin.y-34);x.lineTo(pin.x+16,pin.y-28.5);x.lineTo(pin.x,pin.y-23);x.closePath();x.fill();
+    x.fillStyle='rgba(143,206,106,.4)';x.beginPath();x.arc(pin.x,pin.y,4,0,6.28);x.fill();
+    for(let i=shots.length-1;i>=0;i--){const s=shots[i];s.t++;const p=s.t/s.dur;
+      if(p>=1){shots.splice(i,1);continue;}
+      const px=s.x0+(s.x1-s.x0)*p, py=s.y0+(s.y1-s.y0)*p-Math.sin(Math.PI*p)*s.peak;
+      s.trail.push({x:px,y:py});if(s.trail.length>26)s.trail.shift();
+      for(let j=0;j<s.trail.length;j++){const tt=s.trail[j],a=(j/s.trail.length)*0.5;x.beginPath();x.arc(tt.x,tt.y,2,0,6.28);x.fillStyle='rgba(244,207,95,'+a.toFixed(3)+')';x.fill();}
+      x.beginPath();x.arc(px,py,3.4,0,6.28);x.fillStyle='#f3eccf';x.fill();
+    }
+    if(!reduced && f++%150===0 && shots.length<3) launch(-20,H*0.9-Math.random()*90);
+    requestAnimationFrame(tick);
+  }
+  tick();
+  if(!reduced)addEventListener('pointerdown',e=>{if(e.target.closest('a,input,button'))return;launch(e.clientX,e.clientY);});
+})();
+</script>
+</body>
+</html>
